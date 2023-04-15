@@ -1,0 +1,86 @@
+﻿@model IEnumerable<MasrafTakipMVCProje.Models.Harcama>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+<h1>Harcamalar Listesi</h1>
+
+<p>
+    <a asp-action="Create" class="btn btn-outline-primary mt-2">Yeni Harcama Ekle</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Id)
+            </th>
+            <th>
+                Personel Adı ve Soyadı
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Tarihi)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FisNo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Notlar)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Durumu)
+            </th>
+            <th>
+                İşlemler
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Id)
+                </td>
+                <td>
+                    @item.Personeller.Adi @item.Personeller.Soyadi
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Tarihi)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FisNo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Notlar)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Durumu)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Personeller.Id)
+                </td>
+                <td>
+                    <a asp-controller="HarcamaDetay" asp-action="Details" class="btn btn-danger btn-sm" asp-route-id="@item.Id">
+                        <i class="fa-solid fa-circle-info"></i>
+                    </a>
+
+
+                    @if (item.Durumu == 0)
+                    {
+                        <a asp-action="Delete" class="btn btn-danger btn-sm" asp-route-id="@item.Id"><i class="fa fa-trash"></i></a>
+                        <a asp-action="Edit" class="btn btn-danger btn-sm" asp-route-id="@item.Id"><i class="fa-solid fa-pen-to-square"></i></a>
+
+                    }
+
+                    
+
+
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
